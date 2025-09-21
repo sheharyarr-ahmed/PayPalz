@@ -94,7 +94,7 @@ function Friend({ friend, onSelection, selectedFriend }) {
         <p>YOU AND {friend.name.toUpperCase()} ARE EVEN.</p>
       )}
       <Button onClick={() => onSelection(friend)}>
-        {isSelected ? "SELECT" : "CLOSE"}
+        {isSelected ? "CLOSE" : "SELECT"}
       </Button>
     </li>
   );
@@ -144,17 +144,37 @@ function FormAddFriend({ onAddFriend }) {
 }
 
 function FormSplitBill({ selectedFriend }) {
+  const [bill, setBill] = useState("");
+  const [paidByUser, setPaidByUser] = useState("");
+  const paidByFriend = bill ? bill - paidByUser : "";
+  const [whoIsPaying, setWhoIsPaying] = useState("user");
+
   return (
     <form className="form-split-bill">
       <h2>SPLIT A BILL WITH {selectedFriend.name}</h2>
       <label>💸BILL VALUE</label>
-      <input type="text" />
+      <input
+        type="text"
+        value={bill}
+        onChange={(e) => setBill(Number(e.target.value))}
+      />
       <label>🙋‍♂️YOUR EXPENSE</label>
-      <input type="text" />
+      <input
+        type="text"
+        value={paidByUser}
+        onChange={(e) =>
+          setPaidByUser(
+            Number(e.target.value) > bill ? paidByUser : Number(e.target.value)
+          )
+        }
+      />
       <label>🙎‍♂️{selectedFriend.name.toUpperCase()} EXPENSE</label>
-      <input type="text" disabled />
+      <input type="text" disabled value={paidByFriend} />
       <label>🤑WHO IS PAYING THE BILL?</label>
-      <select>
+      <select
+        value={whoIsPaying}
+        onChange={(e) => setWhoIsPaying(e.target.value)}
+      >
         <option value="user">YOU</option>
         <option value="friend">{selectedFriend.name}</option>
       </select>
