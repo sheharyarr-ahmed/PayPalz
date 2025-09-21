@@ -50,7 +50,7 @@ export default function App() {
       )
     );
 
-    setSelectedFriend(null);
+    // setSelectedFriend(null);
   }
   return (
     <div className="app">
