@@ -45,7 +45,7 @@ export default function App() {
     setFriends((friends) =>
       friends.map((friend) =>
         friend.id === selectedFriend.id
-          ? { ...friend, balance: friend.value + value }
+          ? { ...friend, balance: friend.balance + value }
           : friend
       )
     );
