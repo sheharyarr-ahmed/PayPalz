@@ -69,6 +69,9 @@ export default function App() {
         <FormSplitBill
           selectedFriend={selectedFriend}
           onSplitBill={handleSplitBill}
+          key={selectedFriend.id}
+          // When you give a component a new key, React will treat it as a completely new component instance. That means:
+          // The old component (with its state) is destroyed.A brand-new component is created and mounted in its place.This is why the internal useState values reset.
         />
       )}
     </div>
